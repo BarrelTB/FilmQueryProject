@@ -19,6 +19,7 @@ public class Film {
 	private String rating;
 	private String features;
 	private List<Actor> lActor;
+	private String language;
 	
 	
 
@@ -144,6 +145,14 @@ public class Film {
 		this.lActor = lActor;
 	}
 
+	public String getLanguage() {
+		return language;
+	}
+	
+	
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 	@Override
 	public String toString() {
 		return 
@@ -155,7 +164,9 @@ public class Film {
 				 "\nRating: " + rating +
 				"\n------------------------------------" +
 				 "\nDescription: " + desc +
-				 "\n------------------------------------";
+				"\n------------------------------------" +
+				 "\nLanguage: " + language +
+				"\n------------------------------------";
 	}
 
 	@Override
@@ -230,6 +241,9 @@ public class Film {
 			return false;
 		return true;
 	}
+
+
+
 
 
 

@@ -45,6 +45,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setRating(filmResult.getString("rating"));
 				film.setFeatures(filmResult.getString("special_features"));
 				film.setlActor(findActorsByFilmId(filmId));
+				film.setLanguage(findLanguageOfFilm(filmId));
 				filmResult.close();
 				stmt.close();
 				conn.close();
@@ -147,15 +148,15 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return films;
 	}
+
 	public List<Film> findFilmByKeyWord(String keyWord) {
-		
+
 		List<Film> films = new ArrayList<>();
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			String sql = "SELECT id, title, description, release_year, language_id, rental_duration, ";
 			sql += " rental_rate, length, replacement_cost, rating, special_features " + " FROM film "
-					+ "WHERE title LIKE ? "
-					+ "OR description LIKE ?";
+					+ "WHERE title LIKE ? " + "OR description LIKE ?";
 			PreparedStatement stmt;
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, "%" + keyWord + "%");
@@ -176,8 +177,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				Film film = new Film(filmId, title, desc, releaseYear, langId, rentDur, rate, length, repCost, rating,
 						features);
 				film.setlActor(findActorsByFilmId(film.getFilmId()));
+				film.setLanguage(findLanguageOfFilm(film.getFilmId()));
 				films.add(film);
-			} 
+			}
 			rs.close();
 			stmt.close();
 			conn.close();
@@ -186,6 +188,32 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			e.printStackTrace();
 		}
 		return films;
+	}
+
+	public String findLanguageOfFilm(int filmId) {
+		String language = null;
+		try {
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			String sql = "SELECT language.name FROM language JOIN film ON language.id = film.language_id WHERE film.id = ?";
+			PreparedStatement stmt;
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+
+				language = rs.getString("name");
+
+			} else {
+				return null;
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return language;
 	}
 
 }
