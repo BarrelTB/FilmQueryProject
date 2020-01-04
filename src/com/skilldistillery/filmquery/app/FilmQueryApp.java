@@ -93,7 +93,7 @@ public class FilmQueryApp {
 			String keyWord = input.next();
 
 			films = db.findFilmByKeyWord(keyWord);
-			if (films == null) {
+			if (films.isEmpty()) {
 				System.out.println("+---------------------------+");
 				System.out.println("|That is not a valid Keyword|");
 				System.out.println("|Please type another Keyword|");
