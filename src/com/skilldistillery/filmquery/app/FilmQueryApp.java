@@ -19,7 +19,6 @@ public class FilmQueryApp {
 		app.launch();
 	}
 
-
 	private void launch() {
 		Scanner input = new Scanner(System.in);
 
@@ -29,29 +28,34 @@ public class FilmQueryApp {
 	}
 
 	private void startUserInterface(Scanner input) {
-		System.out.println("+----------------------------+");
-		System.out.println("|Welcome to the Film DataBase|");
-		System.out.println("+----------------------------+");
-		System.out.println("|Please pick one option below|");
-		System.out.println("+----------------------------+");
-		System.out.println("|1. Look up a Film by Film ID|");
-		System.out.println("|2. Look up a Film by keyword|");
-		System.out.println("|3. Exit the Film Application|");
-		System.out.println("+----------------------------+");
-		int choice = input.nextInt();
-		switch (choice) {
-			case 1:
-				filmById(input);
-				break;
-			case 2:
-				filmByKeyword(input);
-				break;
-			case 3:
-			default:
-				System.out.println("+-------------------------------------------------+");
-				System.out.println("|Thank you for using our Film DataBase Application|");
-				System.out.println("+-------------------------------------------------+");
-				break;
+		boolean menu = true;
+
+		while (menu) {
+			System.out.println("+----------------------------+");
+			System.out.println("|Welcome to the Film DataBase|");
+			System.out.println("+----------------------------+");
+			System.out.println("|Please pick one option below|");
+			System.out.println("+----------------------------+");
+			System.out.println("|1. Look up a Film by Film ID|");
+			System.out.println("|2. Look up a Film by keyword|");
+			System.out.println("|3. Exit the Film Application|");
+			System.out.println("+----------------------------+");
+			int choice = input.nextInt();
+			switch (choice) {
+				case 1:
+					filmById(input);
+					break;
+				case 2:
+					filmByKeyword(input);
+					break;
+				case 3:
+				default:
+					System.out.println("+-------------------------------------------------+");
+					System.out.println("|Thank you for using our Film DataBase Application|");
+					System.out.println("+-------------------------------------------------+");
+					menu = false;
+					break;
+			}
 		}
 	}
 
@@ -77,7 +81,7 @@ public class FilmQueryApp {
 					System.out.println(actor);
 				}
 				notValid = false;
-				
+
 			}
 		}
 
@@ -108,22 +112,22 @@ public class FilmQueryApp {
 					}
 				}
 				notValid = false;
-				
+
 			}
 		}
 
 	}
 
 //	private void test() {
-		// TEST for FIND FILM BY ID
+	// TEST for FIND FILM BY ID
 //    Film film = db.findFilmById(1);
 //    System.out.println(film);
 //    System.out.println("Actors In Film: ");
 //    for (Actor actor : film.getlActor()) {
 //		System.out.println(actor);
 //	}
-		
-		// TEST for FIND ACTOR BY ID
+
+	// TEST for FIND ACTOR BY ID
 //    Actor actor = db.findActorById(1);
 //    System.out.println(actor);
 //    System.out.println("Films by Actor:");
@@ -131,15 +135,15 @@ public class FilmQueryApp {
 //    	System.out.println(film);
 //    	System.out.println();
 //    }
-		
-		// TEST for FIND ACTORS BY FILM ID
+
+	// TEST for FIND ACTORS BY FILM ID
 //    List<Actor> lactor = new ArrayList<>();
 //    lactor = db.findActorsByFilmId(1);
 //    for (Actor actor : lactor) {
 //		System.out.println(actor);
 //	}
-		
-		// TEST for FIND FILMS BY ACTOR ID
+
+	// TEST for FIND FILMS BY ACTOR ID
 //	  List<Film> lFilm = new ArrayList<>();
 //	  lFilm = db.findFilmsByActorId(1);
 //	  for (Film film : lFilm) {
