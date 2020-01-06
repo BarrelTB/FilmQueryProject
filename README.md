@@ -10,7 +10,6 @@ This program utilizes an SQL database of films. The user can search by FilmID or
 + Object Relational Mapping
 + SQL Queries
 + JDBC Techniques
-+
 
 ### Technologies Used
 
